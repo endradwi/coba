@@ -15,12 +15,16 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
         run: ls -R
+      - name: Setup Node.js 22.2.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.2.0
       - name: Install Nuxt dependencies
         run: |
           cd nuxt
           npm install
           npm run build
-          npx pkg .output/server/index.mjs --targets node20-linux-x64 --output nuxt-binary
+          npx pkg .output/server/index.mjs --targets node22-linux-x64 --output nuxt-binary
       - name: Install pkg for binary conversion
         run: npm install -g pkg
       - name: Convert Nuxt to binary
