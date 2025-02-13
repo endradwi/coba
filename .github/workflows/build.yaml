@@ -20,6 +20,17 @@ jobs:
           cd nuxt
           npm install
           npm run build
+      - name: Install pkg for binary conversion
+        run: npm install -g pkg
+      - name: Convert Nuxt to binary
+        run: |
+          cd nuxt
+          npm run bin
+      - name: Upload Nuxt Binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuxt-binary
+          path: nuxt/nuxt-binary
       - name: Install Go
         run: sudo apt-get install golang-go
       - name: Build backend
