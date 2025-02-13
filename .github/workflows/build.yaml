@@ -17,7 +17,7 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: Change directory
-        working-directory: ./nuxt
+        run:  cd nuxt
       - name: Install nuxt
         run: npm install
       - name: Build Nuxt Ap
@@ -25,6 +25,6 @@ jobs:
       - name: Install Go
         run: sudo apt-get install golang-go
       - name: Change directory to backend
-        working-directory: ./backend 
+        run: ./backend 
       - name: Build backend
         run: go build -o mybackend main.go 
