@@ -46,17 +46,3 @@ jobs:
         with:
           name: backend-binary
           path: backend/mybackend
-      - name: Deploy to Server via SSH
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            cd /path/to/deploy
-            rm -rf nuxt-binary mybackend
-            mv ~/nuxt-binary /path/to/deploy/
-            mv ~/mybackend /path/to/deploy/
-            chmod +x nuxt-binary mybackend
-            ./mybackend &
-            ./nuxt-binary &
