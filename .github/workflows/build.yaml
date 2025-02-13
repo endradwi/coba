@@ -1,58 +1,31 @@
-name: CI/CD Pipeline
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
 
-on:
-  push:
-    branches:
-      - main
 jobs:
-  ci-cd-pipeline:
+  Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      # Checkout repository
-      - name: Checkout code
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
         uses: actions/checkout@v4
-      # Debugging untuk melihat struktur direktori
-      - name: List project files
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
         run: ls -R
-      # Install Node.js dan dependencies
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-      - name: Install dependencies
+      - name: Install Nuxt dependencies
         run: |
           cd nuxt
           npm install
-
-      - name: Install ESLint manually
-        run: |
-          cd nuxt
-          npm install --save-dev eslint @nuxt/eslint-config
-
-      - name: Run ESLint (Lint Nuxt)
-        run: |
-          cd nuxt
-          npx eslint --ext .js,.vue .
-
-      # Build Nuxt menjadi static files
-      - name: Build Nuxt
-        run: |
-          cd nuxt
           npm run build
-      # Install Go
       - name: Install Go
-        run: sudo apt-get install -y golang-go
-      # Check standar penulisan kode (Linting) untuk Go
-      - name: Lint Go code
-        run: |
-          go install golang.org/x/lint/golint@latest
-          golint ./backend/...
-      # Build backend menjadi binary
-      - name: Build Go Backend
+        run: sudo apt-get install golang-go
+      - name: Build backend
         run: |
           cd backend
           go build -o mybackend main.go
-      # Simpan binary sebagai artifacts (Opsional)
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
