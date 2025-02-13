@@ -19,12 +19,21 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-      # Check standar penulisan kode (Linting) untuk Nuxt
-      - name: Install dependencies & Lint Nuxt
+      - name: Install dependencies
         run: |
           cd nuxt
           npm install
-          npm run lint
+
+      - name: Install ESLint manually
+        run: |
+          cd nuxt
+          npm install --save-dev eslint @nuxt/eslint-config
+
+      - name: Run ESLint (Lint Nuxt)
+        run: |
+          cd nuxt
+          npx eslint --ext .js,.vue .
+
       # Build Nuxt menjadi static files
       - name: Build Nuxt
         run: |
