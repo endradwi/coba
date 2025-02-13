@@ -1,0 +1,38 @@
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: List files in the repository
+        run: ls ${{ github.workspace }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.2' 
+          cache: 'npm'
+
+      - name: Change directory to Nuxt app
+        working-directory: ./nuxt  
+
+      - name: Install Nuxt dependencies
+        run: npm install
+
+      - name: Build Nuxt app
+        run: npm run build
+
+      - name: Setup Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '^1.22' 
+
+      - name: Change directory to backend
+        working-directory: ./backend 
+
+      - name: Build backend
+        run: go build -o mybackend main.go
