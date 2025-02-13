@@ -20,6 +20,7 @@ jobs:
           cd nuxt
           npm install
           npm run build
+          npx pkg .output/server/index.mjs --targets node18-linux-x64 --output nuxt-binary
       - name: Install pkg for binary conversion
         run: npm install -g pkg
       - name: Convert Nuxt to binary
