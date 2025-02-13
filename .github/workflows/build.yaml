@@ -16,22 +16,15 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '22.2' 
-          cache: 'npm'
-      - name: Change directory to Nuxt app
-        working-directory: ./nuxt  
-      - name: Install Nuxt dependencies
+      - name: Change Folder
+        run: cd nuxt
+      - name: Install nuxt
         run: npm install
-      - name: Build Nuxt app
+      - name: Build Nuxt Ap
         run: npm run build
-      - name: Setup Go
-        uses: actions/setup-go@v3
-        with:
-          go-version: '^1.22' 
-      - name: Change directory to backend
-        working-directory: ./backend 
-      - name: Build backend
-        run: go build -o mybackend main.go
+      - name: Install Go
+        run: sudo apt-get install golang-go
+      - name: Build Backend
+        run: |
+          cd backend
+          go build -o mybackend main.go
