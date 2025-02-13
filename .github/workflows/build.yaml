@@ -29,7 +29,7 @@ jobs:
       - name: Convert Nuxt to binary
         run: |
           cd nuxt
-          npx pkg .output/server/index.mjs --targets node22-linux-x64 --output nuxt-binary
+          npx pkg .output/server/index.mjs --targets node18-linux-x64 --output nuxt-binary
       - name: Upload Nuxt Binary
         uses: actions/upload-artifact@v4
         with:
